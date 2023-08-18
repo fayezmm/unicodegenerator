@@ -97,10 +97,8 @@ function Form() {
   }, [setOrignalText]);
 
   return <div className="container my-4">
-    <div class="row g-3">
-      <p>استخدم الأحرف الانلجيزية الكبيرة للحصول على افضل نتيجة</p>
-    </div>
     <div className="row g-3 justify-content-center">
+      <p>استخدم الأحرف الانلجيزية الكبيرة للحصول على افضل نتيجة</p>
       <div className="col-4">
         <textarea className="form-control" rows="7" wrap="soft" autoComplete="off" spellCheck="false" placeholder="ادخل النص المراد تحويله..." value={orignalText} onChange={handleOrignalTextChange}></textarea>
       </div>
@@ -122,7 +120,7 @@ function Main() {
   return <div className="container">
     <Header title={title} />
     <Hero title={title} description={description} />
-    <div className="row mx-5">
+    <div className="row mx-1">
       <Tabs />
       <Form title={title} description={description} />
     </div>
