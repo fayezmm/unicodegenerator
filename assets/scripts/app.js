@@ -16,14 +16,6 @@ function Header({ title }) {
   </header>;
 }
 
-// function Header2({ title, description }) {
-//   return <div className="py-5 text-center">
-//     <img className="d-block mx-auto mb-4" src="/assets/img/logo.svg" alt="" width="72" height="57" />
-//     <h2>{title}</h2>
-//     <p className="lead">{description}</p>
-//   </div>;
-// }
-
 function Hero({ title, description }) {
   return <div className="px-2 py-2 my-2 text-center">
     <img className="d-block mx-auto mb-4" src="./assets/img/logo.svg" alt="" width="72" height="57" />
