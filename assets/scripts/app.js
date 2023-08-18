@@ -88,7 +88,7 @@ function Form() {
     setOrignalText(event.currentTarget.value);
   }, [setOrignalText]);
 
-  return <div className="container my-4">
+  return <div id="form" className="container my-4">
     <div className="row g-3 justify-content-center">
       <p>استخدم الأحرف الانلجيزية الكبيرة للحصول على افضل نتيجة</p>
       <div className="col-4">
