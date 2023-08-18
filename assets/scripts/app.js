@@ -16,13 +16,13 @@ function Header({ title }) {
   </header>;
 }
 
-function Header2({ title, description }) {
-  return <div className="py-5 text-center">
-    <img className="d-block mx-auto mb-4" src="/assets/img/logo.svg" alt="" width="72" height="57" />
-    <h2>{title}</h2>
-    <p className="lead">{description}</p>
-  </div>;
-}
+// function Header2({ title, description }) {
+//   return <div className="py-5 text-center">
+//     <img className="d-block mx-auto mb-4" src="/assets/img/logo.svg" alt="" width="72" height="57" />
+//     <h2>{title}</h2>
+//     <p className="lead">{description}</p>
+//   </div>;
+// }
 
 function Hero({ title, description }) {
   return <div className="px-2 py-2 my-2 text-center">
@@ -45,21 +45,28 @@ function Tabs() {
   </ul>;
 }
 
-function endode(str) {
-
+function encodeOne(code) {
   const add = 0xdda5;
   const prefix = 0xd83c;
   const suffix = 0xfe0f;
   let result = "";
+  result += String.fromCharCode(prefix);
+  result += String.fromCharCode(code + add);
+  result += String.fromCharCode(suffix);
+  return result;
+}
+
+function endode(str) {
+  const min = 0x41;
+  const max = 0x5a;
+  let result = "";
 
   for (let i = 0; i < str.length; i++) {
     let code = str.charCodeAt(i);
-    console.log(`Found code: ${code} at ${i}`);
-    if (code >= 0x41 && code <= 0x5a) {
-      console.log("Ok");
-      result += String.fromCharCode(prefix);
-      result += String.fromCharCode(code + add);
-      result += String.fromCharCode(suffix);
+    if (code >= min && code <= max) {
+      result += encodeOne(code);
+    } else {
+      result += String.fromCharCode(code);
     }
   }
 
@@ -77,8 +84,6 @@ function Form() {
   };
 
   const handleCopy = () => {
-    //setEncodedText(orignalText);
-    //encodedText = orignalText; 
     navigator.clipboard.writeText(encodedText);
   };
 
@@ -88,13 +93,15 @@ function Form() {
   };
 
   const handleOrignalTextChange = React.useCallback((event) => {
-    const cleanText = event.currentTarget.value.replace(/[^a-z]/gi, '').toUpperCase();
-    setOrignalText(cleanText);
+    setOrignalText(event.currentTarget.value);
   }, [setOrignalText]);
 
-  return <div className="container my-5">
+  return <div className="container my-4">
+    <div class="row g-3">
+      <p>استخدم الأحرف الانلجيزية الكبيرة للحصول على افضل نتيجة</p>
+    </div>
     <div className="row g-3 justify-content-center">
-      <div className="col-3">
+      <div className="col-4">
         <textarea className="form-control" rows="7" wrap="soft" autoComplete="off" spellCheck="false" placeholder="ادخل النص المراد تحويله..." value={orignalText} onChange={handleOrignalTextChange}></textarea>
       </div>
       <div className="col-2">
@@ -104,7 +111,7 @@ function Form() {
           <button className="btn btn-primary btn-lg" onClick={handleClear} disabled={!orignalText}>امسح</button>
         </div>
       </div>
-      <div className="col-3">
+      <div className="col-4">
         <textarea className="form-control" rows="7" wrap="soft" autoComplete="off" spellCheck="false" placeholder="" value={encodedText} readOnly={true}></textarea>
       </div>
     </div>
@@ -117,8 +124,6 @@ function Main() {
     <Hero title={title} description={description} />
     <div className="row mx-5">
       <Tabs />
-    </div>
-    <div className="row">
       <Form title={title} description={description} />
     </div>
   </div>;
